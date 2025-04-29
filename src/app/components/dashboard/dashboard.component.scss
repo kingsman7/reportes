@@ -1,7 +1,35 @@
 @use '@angular/material' as mat;
 
 
-  .custom-sidenav-content {
-    background-color: black;
+.mat-sidenav-container {
+  .mat-sidenav {
+      background-color: #363839;
+      color: white;
+      border-radius: 0px;
+      width: 250px;
+      .mat-toolbar {
+        background-color: #363839;
+        color: white;
+      }
+    }
+  }
+  .mat-sidenav-content {
+    background-color: #7f7f7f;
+    border-radius: 0px;
+    height: 100vh;
+    overflow-y: auto;
+    .mat-toolbar {
+      background-color: #363839;
+      color: white;
+    }
+  }
+
+  .sidenav-ancor {
+    display: flex;
+    align-items: center;
+    align-items: center;
     color: white;
+    .mat-icon{
+      margin-right: 10px;
+    }
   }

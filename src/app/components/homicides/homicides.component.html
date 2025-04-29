@@ -1,1 +1,31 @@
-<p>homicides works!</p>
+<div class="homicides-title">
+  <h1>Reportes Homicidio</h1>
+</div>
+<div class="homicides-container">
+  <div class="homicides-content-buttons">
+    <button mat-flat-button>
+      <mat-icon>upload_file</mat-icon>
+      <span>Exportar a Excel</span>
+    </button>
+    <button mat-flat-button>
+      <mat-icon>folder</mat-icon>
+      <span>Archivo</span>
+    </button>
+    <button mat-flat-button>
+      <mat-icon>app_registration</mat-icon>
+      <span>Registar Delito</span>
+    </button>
+    <button mat-flat-button>
+      <mat-icon>edit_note</mat-icon>
+      <span>Editar datos</span>
+    </button>
+  </div>
+  <div class="homicides-content-data">
+    <div class="homicides-container-table">
+      <app-table-homicides></app-table-homicides>
+    </div>
+    <div class="homicides-container-chart">
+      <app-chart-homicides></app-chart-homicides>
+    </div>
+  </div>
+</div>

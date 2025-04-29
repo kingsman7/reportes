@@ -36,33 +36,39 @@ export class ChartHomicidesComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.chart = echarts.init(this.chartContainer.nativeElement);
       this.initChart();
+      this.resizeChart();
     }, 2000)
   }
+  resizeChart() {
+    if(this.chart) {
+      this.chart.resize();
+    }
+  }
   data = [
-    { name: 'Amazonas', value: Math.round(Math.random() * 30) },
-    { name: 'Anzoátegui', value: Math.round(Math.random() * 30) },
-    { name: 'Apure', value: Math.round(Math.random() * 30) },
-    { name: 'Aragua', value: Math.round(Math.random() * 30) },
-    { name: 'Barinas', value: Math.round(Math.random() * 30) },
-    { name: 'Bolívar', value: Math.round(Math.random() * 30) },
-    { name: 'Carabobo', value: Math.round(Math.random() * 30) },
-    { name: 'Cojedes', value: Math.round(Math.random() * 30) },
-    { name: 'Delta Amacuro', value: Math.round(Math.random() * 30) },
-    { name: 'Falcón', value: Math.round(Math.random() * 30) },
-    { name: 'Guárico', value: Math.round(Math.random() * 30) },
-    { name: 'Lara', value: Math.round(Math.random() * 30) },
-    { name: 'Mérida', value: Math.round(Math.random() * 30) },
-    { name: 'Miranda', value: Math.round(Math.random() * 30) },
-    { name: 'Monagas', value: Math.round(Math.random() * 30) },
-    { name: 'Nueva Esparta', value: Math.round(Math.random() * 30) },
-    { name: 'Portuguesa', value: Math.round(Math.random() * 30) },
-    { name: 'Sucre', value: Math.round(Math.random() * 30) },
-    { name: 'Táchira', value: Math.round(Math.random() * 30) },
-    { name: 'Trujillo', value: Math.round(Math.random() * 30) },
-    { name: 'Yaracuy', value: Math.round(Math.random() * 30) },
-    { name: 'Zulia', value: Math.round(Math.random() * 30) },
-    { name: 'Distrito Capital', value: Math.round(Math.random() * 30) },
-    { name: 'Dependencias Federales', value: Math.round(Math.random() * 30) },
+    { name: 'Amazonas', value: Math.round(Math.random() * 5) },
+    { name: 'Anzoátegui', value: Math.round(Math.random() * 5) },
+    { name: 'Apure', value: Math.round(Math.random() * 5) },
+    { name: 'Aragua', value: Math.round(Math.random() * 5) },
+    { name: 'Barinas', value: Math.round(Math.random() * 5) },
+    { name: 'Bolívar', value: Math.round(Math.random() * 5) },
+    { name: 'Carabobo', value: Math.round(Math.random() * 5) },
+    { name: 'Cojedes', value: Math.round(Math.random() * 5) },
+    { name: 'Delta Amacuro', value: Math.round(Math.random() * 5) },
+    { name: 'Falcón', value: Math.round(Math.random() * 5) },
+    { name: 'Guárico', value: Math.round(Math.random() * 5) },
+    { name: 'Lara', value: Math.round(Math.random() * 5) },
+    { name: 'Mérida', value: Math.round(Math.random() * 5) },
+    { name: 'Miranda', value: Math.round(Math.random() * 5) },
+    { name: 'Monagas', value: Math.round(Math.random() * 5) },
+    { name: 'Nueva Esparta', value: Math.round(Math.random() * 5) },
+    { name: 'Portuguesa', value: Math.round(Math.random() * 5) },
+    { name: 'Sucre', value: Math.round(Math.random() * 5) },
+    { name: 'Táchira', value: Math.round(Math.random() * 5) },
+    { name: 'Trujillo', value: Math.round(Math.random() * 5) },
+    { name: 'Yaracuy', value: Math.round(Math.random() * 5) },
+    { name: 'Zulia', value: Math.round(Math.random() * 5) },
+    { name: 'Distrito Capital', value: Math.round(Math.random() * 5) },
+    { name: 'Dependencias Federales', value: Math.round(Math.random() * 5) },
   ];
 
   dataSort() {
@@ -109,8 +115,18 @@ export class ChartHomicidesComponent implements OnInit, AfterViewInit {
       };
 
       const optionsBar: EChartsOption = {
+        title: {
+          text: 'Waterfall Chart',
+          subtext: 'Living Expenses in Shenzhen'
+        },
         xAxis: {
-          type: 'value'
+          type: 'value',
+          axisTick: {
+            lineStyle: {
+              color: '#000',
+              width: 1
+            }
+          }
         },
         yAxis: {
           type: 'category',
@@ -119,7 +135,16 @@ export class ChartHomicidesComponent implements OnInit, AfterViewInit {
           },
           data: this.data.map(function (item) {
             return item.name;
-          })
+          }),
+          axisTick: {
+            lineStyle: {
+              color: '#000',
+              width: 1
+            }
+          }
+        },
+        textStyle:{
+          color: '#fff'
         },
         animationDurationUpdate: 1000,
         series: {
@@ -136,10 +161,10 @@ export class ChartHomicidesComponent implements OnInit, AfterViewInit {
 
       this.chart.setOption(optionsBar);
 
-      setInterval( () => {
+      /* setInterval( () => {
         currentOption = currentOption !== mapOption ? mapOption : optionsBar;
         this.chart.setOption(currentOption, true);
-      }, 5000);
+      }, 5000); */
 
     })
   }

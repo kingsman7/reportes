@@ -1,0 +1,63 @@
+.homicides-container{
+  padding: 0px 10px;
+}
+.homicides-title{
+  display: flex;
+  align-items: center;
+  background: #8f8f8f;
+  height: 100px;
+  margin: 10px 10px 0px 10px;
+  border-radius: 5px;
+  h1{
+    margin: 0px;
+    color: rgb(255, 255, 255);
+    padding: 0px 10px;
+  }
+}
+.homicides-content-data {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.homicides-content-buttons {
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+  gap: 10px;
+  button{
+    display: flex;
+    align-items: center;
+    flex: 1;
+    height: 80px;
+    border-radius: 5px !important;
+    background: #8f8f8f;
+    .mat-icon{
+      margin-right: 10px;
+      width: 48px; /* Adjust the width as needed */
+      height: 43px; /* Adjust the height as needed */
+      font-size: 40px;
+    }
+
+  }
+}
+.homicides-container-table{
+  flex: 1;
+}
+.homicides-container-chart{
+  flex: 1;
+}
+
+@media screen and (max-width: 1440px) {
+  .homicides-content-data {
+    flex-direction: column;
+  }
+  .homicides-container-table,
+  .homicides-container-chart {
+    flex: none;
+    width: 100%;
+  }
+}
+
+
+
