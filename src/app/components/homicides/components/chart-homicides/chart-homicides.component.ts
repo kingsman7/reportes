@@ -34,36 +34,35 @@ export class ChartHomicidesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.isLoad = true;
+      this.chart = echarts.init(this.chartContainer.nativeElement);
       this.initChart();
-
     }, 2000)
   }
   data = [
-    { name: 'Amazonas', value: Math.round(Math.random() * 1000000) },
-    { name: 'Anzoátegui', value: Math.round(Math.random() * 1000000) },
-    { name: 'Apure', value: Math.round(Math.random() * 1000000) },
-    { name: 'Aragua', value: Math.round(Math.random() * 1000000) },
-    { name: 'Barinas', value: Math.round(Math.random() * 1000000) },
-    { name: 'Bolívar', value: Math.round(Math.random() * 1000000) },
-    { name: 'Carabobo', value: Math.round(Math.random() * 1000000) },
-    { name: 'Cojedes', value: Math.round(Math.random() * 1000000) },
-    { name: 'Delta Amacuro', value: Math.round(Math.random() * 1000000) },
-    { name: 'Falcón', value: Math.round(Math.random() * 1000000) },
-    { name: 'Guárico', value: Math.round(Math.random() * 1000000) },
-    { name: 'Lara', value: Math.round(Math.random() * 1000000) },
-    { name: 'Mérida', value: Math.round(Math.random() * 1000000) },
-    { name: 'Miranda', value: Math.round(Math.random() * 1000000) },
-    { name: 'Monagas', value: Math.round(Math.random() * 1000000) },
-    { name: 'Nueva Esparta', value: Math.round(Math.random() * 1000000) },
-    { name: 'Portuguesa', value: Math.round(Math.random() * 1000000) },
-    { name: 'Sucre', value: Math.round(Math.random() * 1000000) },
-    { name: 'Táchira', value: Math.round(Math.random() * 1000000) },
-    { name: 'Trujillo', value: Math.round(Math.random() * 1000000) },
-    { name: 'Yaracuy', value: Math.round(Math.random() * 1000000) },
-    { name: 'Zulia', value: Math.round(Math.random() * 1000000) },
-    { name: 'Distrito Capital', value: Math.round(Math.random() * 1000000) },
-    { name: 'Dependencias Federales', value: Math.round(Math.random() * 1000000) },
+    { name: 'Amazonas', value: Math.round(Math.random() * 30) },
+    { name: 'Anzoátegui', value: Math.round(Math.random() * 30) },
+    { name: 'Apure', value: Math.round(Math.random() * 30) },
+    { name: 'Aragua', value: Math.round(Math.random() * 30) },
+    { name: 'Barinas', value: Math.round(Math.random() * 30) },
+    { name: 'Bolívar', value: Math.round(Math.random() * 30) },
+    { name: 'Carabobo', value: Math.round(Math.random() * 30) },
+    { name: 'Cojedes', value: Math.round(Math.random() * 30) },
+    { name: 'Delta Amacuro', value: Math.round(Math.random() * 30) },
+    { name: 'Falcón', value: Math.round(Math.random() * 30) },
+    { name: 'Guárico', value: Math.round(Math.random() * 30) },
+    { name: 'Lara', value: Math.round(Math.random() * 30) },
+    { name: 'Mérida', value: Math.round(Math.random() * 30) },
+    { name: 'Miranda', value: Math.round(Math.random() * 30) },
+    { name: 'Monagas', value: Math.round(Math.random() * 30) },
+    { name: 'Nueva Esparta', value: Math.round(Math.random() * 30) },
+    { name: 'Portuguesa', value: Math.round(Math.random() * 30) },
+    { name: 'Sucre', value: Math.round(Math.random() * 30) },
+    { name: 'Táchira', value: Math.round(Math.random() * 30) },
+    { name: 'Trujillo', value: Math.round(Math.random() * 30) },
+    { name: 'Yaracuy', value: Math.round(Math.random() * 30) },
+    { name: 'Zulia', value: Math.round(Math.random() * 30) },
+    { name: 'Distrito Capital', value: Math.round(Math.random() * 30) },
+    { name: 'Dependencias Federales', value: Math.round(Math.random() * 30) },
   ];
 
   dataSort() {
@@ -73,66 +72,76 @@ export class ChartHomicidesComponent implements OnInit, AfterViewInit {
   }
 
   initChart(): void {
-    this.chart = echarts.init(this.chartContainer.nativeElement);
-    this.initMap();
-    const mapOption: EChartsOption = {
-      visualMap: {
-        left: 'right',
-        min: 500000,
-        max: 38000000,
-        inRange: {
-          // prettier-ignore
-          color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+    this.http.get('assets/geoVenezuela.geojson').subscribe((vzlaJson: any) => {
+      echarts.registerMap('Venezuela', vzlaJson);
+      const mapOption: EChartsOption = {
+        visualMap: {
+          left: 'right',
+          min: 1,
+          max: 30,
+          inRange: {
+            color: [
+              '#313695',
+              '#4575b4',
+              '#74add1',
+              '#abd9e9',
+              '#e0f3f8',
+              '#ffffbf',
+              '#fee090',
+              '#fdae61',
+              '#f46d43',
+              '#d73027',
+              '#a50026'
+            ]
+          }
         },
-        text: ['High', 'Low'],
-        calculable: true
-      },
-      series: [
-        {
+        series: [
+          {
+            id: 'population',
+            type: 'map',
+            roam: true,
+            map: 'Venezuela',
+            animationDurationUpdate: 1000,
+            universalTransition: true,
+            data: this.data
+          }
+        ]
+      };
+
+      const optionsBar: EChartsOption = {
+        xAxis: {
+          type: 'value'
+        },
+        yAxis: {
+          type: 'category',
+          axisLabel: {
+            rotate: 30
+          },
+          data: this.data.map(function (item) {
+            return item.name;
+          })
+        },
+        animationDurationUpdate: 1000,
+        series: {
+          type: 'bar',
           id: 'population',
-          type: 'map',
-          roam: true,
-          map: 'USA',
-          animationDurationUpdate: 1000,
-          universalTransition: true,
-          data: this.data
+          data: this.data.map(function (item) {
+            return item.value;
+          }),
+          universalTransition: true
         }
-      ]
-    };
+      };
 
-    const optionsBar: EChartsOption = {
-      xAxis: {
-        type: 'value'
-      },
-      yAxis: {
-        type: 'category',
-        axisLabel: {
-          rotate: 30
-        },
-        data: this.data.map(function (item) {
-          return item.name;
-        })
-      },
-      animationDurationUpdate: 1000,
-      series: {
-        type: 'bar',
-        id: 'population',
-        data: this.data.map(function (item) {
-          return item.value;
-        }),
-        universalTransition: true
-      }
-    };
+      let currentOption = optionsBar;
 
-    let currentOption = mapOption;
+      this.chart.setOption(optionsBar);
 
-    this.chart.setOption(mapOption);
+      setInterval( () => {
+        currentOption = currentOption !== mapOption ? mapOption : optionsBar;
+        this.chart.setOption(currentOption, true);
+      }, 5000);
 
-    setInterval( () => {
-      currentOption = currentOption === mapOption ? optionsBar : mapOption;
-      this.chart.setOption(currentOption, true);
-    }, 5000);
-
+    })
   }
   initMap() {
     this.http.get('assets/geoVenezuela.json').subscribe((usaJson: any) => {

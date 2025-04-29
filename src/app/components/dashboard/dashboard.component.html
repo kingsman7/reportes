@@ -1,1 +1,34 @@
-<p>dashboard works!</p>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened fixedInViewport>
+    <mat-toolbar>Reportes</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="homicidios" routerLinkActive="list-item-active">
+        <mat-icon>assignment</mat-icon>
+        <span>Homicidios</span>
+      </a>
+      <a mat-list-item routerLink="intervencion-legal" routerLinkActive="list-item-active">
+        <mat-icon>gavel</mat-icon>
+        <span>Intervención Legal</span>
+      </a>
+      <a mat-list-item routerLink="secuestros" routerLinkActive="list-item-active">
+        <mat-icon>report</mat-icon>
+        <span>Secuestros</span>
+      </a>
+      <a mat-list-item routerLink="robos" routerLinkActive="list-item-active">
+        <mat-icon>security</mat-icon>
+        <span>Robos</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button>
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Reportes Estadísticos</span>
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
