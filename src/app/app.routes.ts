@@ -21,11 +21,11 @@ export const routes: Routes = [
       {
         path: 'robos',
         loadComponent: () => import('./components/robberies/robberies.component').then(m => m.RobberiesComponent),
+      },
+      {
+        path: '**',
+        redirectTo: 'homicidios',
       }
     ]
   },
-  {
-    path: '**',
-    redirectTo: 'dashboard/homicidios',
-  }
 ];
