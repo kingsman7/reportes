@@ -151,7 +151,13 @@ export class ChartHomicidesComponent implements OnInit, AfterViewInit {
           type: 'bar',
           id: 'population',
           data: this.data.map(function (item) {
-            return item.value;
+            return {
+              value: item.value,
+              itemStyle: {
+                color: '#e6dac7'
+              }
+            };
+
           }),
           universalTransition: true
         }
